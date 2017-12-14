@@ -17,8 +17,8 @@ import collections
 import re
 
 
-from tcd_server import ThreadedTCPServer
-from tcd_server import ThreadedTCPRequestHandler
+from tcp_server import ThreadedTCPServer
+from tcp_server import ThreadedTCPRequestHandler
 
 UPLOAD_SYNTAX = "UPLOAD: [a-zA-Z0-9_.]*\nDATA: .*\n\n"
 UPDATE_REGEX = "UPDATE: [a-zA-Z0-9_.]*\nDATA: .*\n\n"
