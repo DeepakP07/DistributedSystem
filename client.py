@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Dec 9 16:13:24 2017
-
-@author: deepa
-"""
-
 import socket
 import sys
 from time import sleep
@@ -12,18 +5,18 @@ from random import randrange
 
 def get_port(data):
 	# connect to socket
-	soc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	soc.connect(("0.0.0.0", int(sys.argv[1])))
-	soc.settimeout(2)
+	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	s.connect(("0.0.0.0", int(sys.argv[1])))
+	s.settimeout(2)
 
-	# send data...
+	# send data
 	print "Requesting port for: \"" + data + "\""
-	soc.sendall(data)
+	s.sendall(data)
 
-	soc.settimeout(2)
+	s.settimeout(2)
 
-	# printing the received response
-	received = soc.recv(4096)
+	# print received response
+	received = s.recv(4096)
 	print "Port Rec: \"{}\"".format(received)
 	parser = received.splitlines()
  	port = parser[0].split(' ',1)[1]
@@ -43,9 +36,7 @@ data6 = "UPDATE: foldername2/room3.txt\nUpdating a file\n\n"
 data7 = "DOWNLOAD: foldername1/room1.txt\n\n\n"
 data8 = "DOWNLOAD: foldername1/room2.txt\n\n\n"
 data9 = "DOWNLOAD: foldername2/room3.txt\n\n\n"
-
 #    ULOADING FILES
-
 # send data
 print "Sent: \"" + data1 + "\""
 r = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -62,7 +53,7 @@ raw_input("Press Enter to continue...")
 
 # send data
 r = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-r.connect(("0.0.0.0", int(get_port(data2)))) 
+r.connect(("0.0.0.0", int(get_port(data2))))
 r.settimeout(2)
 
 r.sendall(data2)
@@ -84,7 +75,9 @@ r.settimeout(2)
 r.sendall(data3)
 # print received response
 received = r.recv(4096)
-print "Rec: \"{}\"".format(received) # READ FILES
+print "Rec: \"{}\"".format(received)
+
+# READ FILES
 # wait for key press
 raw_input("Press Enter to continue...")
 
@@ -130,6 +123,7 @@ print "Rec: \"{}\"".format(received)
 
 
 #    UPDATING FILES
+
 # wait for key press
 raw_input("Press Enter to continue...")
 
@@ -143,4 +137,74 @@ r.sendall(data4)
 # print received response
 received = r.recv(4096)
 
+print "Rec: \"{}\"".format(received)
+# wait for key press
+raw_input("Press Enter to continue...")
+
+# send data
+r = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+r.connect(("0.0.0.0", int(get_port(data5))))
+r.settimeout(2)
+
+r.sendall(data5)
+
+# print received response
+received = r.recv(4096)
+print "Rec: \"{}\"".format(received)
+
+# wait for key press
+raw_input("Press Enter to continue...")
+
+# send data
+print "Sent: \"" + data6 + "\""
+
+r = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+r.connect(("0.0.0.0", int(get_port(data6))))
+r.settimeout(2)
+
+r.sendall(data6)
+# print received response
+received = r.recv(4096)
+print "Rec: \"{}\"".format(received)
+
+# READ FILES
+
+# send data
+print "Sent: \"" + data7 + "\""
+r = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+r.connect(("0.0.0.0", int(get_port(data7))))
+r.settimeout(2)
+r.sendall(data7)
+
+# print received response
+received = r.recv(4096)
+
+print "Rec: \"{}\"".format(received)
+# wait for key press
+raw_input("Press Enter to continue...")
+
+# send data
+r = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+r.connect(("0.0.0.0", int(get_port(data8))))
+r.settimeout(2)
+
+r.sendall(data8)
+
+# print received response
+received = r.recv(4096)
+print "Rec: \"{}\"".format(received)
+
+# wait for key press
+raw_input("Press Enter to continue...")
+
+# send data
+print "Sent: \"" + data9 + "\""
+
+r = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+r.connect(("0.0.0.0", int(get_port(data9))))
+r.settimeout(2)
+
+r.sendall(data9)
+# print received response
+received = r.recv(4096)
 print "Rec: \"{}\"".format(received)
